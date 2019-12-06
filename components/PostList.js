@@ -15,21 +15,25 @@ query queryPosts {
 
 class QueryPosts extends Query {}
 
-const PostList = () => (
-  <QueryPosts query={QUERY_POSTS}>
-    {({ loading, error, data }) => {
-      if (loading) return <Text>Loading...</Text>;
-      if (error) return <Text>Error:{error}</Text>;
-      if (!data) return <Text>No Data</Text>;
-      return (
-        <FlatList
-          data={data.posts}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Text>{item.text}</Text>}
-        />
-      );
-    }}
-  </QueryPosts>
-);
+// const PostList = () => (
+//   <QueryPosts query={QUERY_POSTS}>
+//     {({ loading, error, data }) => {
+//       if (loading) return <Text>Loading...</Text>;
+//       if (error) return <Text>Error:{error}</Text>;
+//       if (!data) return <Text>No Data</Text>;
+//       return (
+//         <FlatList
+//           data={data.posts}
+//           keyExtractor={item => String(item.id)}
+//           renderItem={({ item }) => <Text>{item.text}</Text>}
+//         />
+//       );
+//     }}
+//   </QueryPosts>
+// );
+
+const PostList = () => {
+  return <Text>Hiii</Text>;
+};
 
 export default PostList;

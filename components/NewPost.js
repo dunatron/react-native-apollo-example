@@ -43,28 +43,32 @@ mutation addPost($text: String!) {
 
 class MutationPost extends Mutation {}
 
-const NewPost = props => {
-  console.log("Test props => ", props);
-  const [testAddPost] = useMutation(ADD_POST);
-  return (
-    <MutationPost mutation={ADD_POST} refetchQueries={["queryPosts"]}>
-      {addPost => {
-        const add = text => {
-          addPost({ variables: { text } });
-        };
-        return <MyTextInput onSubmit={add} />;
-      }}
-    </MutationPost>
-  );
-};
-
 // const NewPost = props => {
 //   console.log("Test props => ", props);
-//   // const [addPost] = useMutation(ADD_POST);
-//   const add = text => {
-//     addPost({ variables: { text } });
-//   };
-//   return <MyTextInput onSubmit={add} />;
+//   const [testAddPost] = useMutation(ADD_POST);
+//   // return (
+//   //   <MutationPost mutation={ADD_POST} refetchQueries={["queryPosts"]}>
+//   //     {addPost => {
+//   //       const add = text => {
+//   //         addPost({ variables: { text } });
+//   //       };
+//   //       return <MyTextInput onSubmit={add} />;
+//   //     }}
+//   //   </MutationPost>
+//   // );
 // };
+
+const NewPost = props => {
+  console.log("Test props => ", props);
+  const [addPost, { data, loading, error }] = useMutation(ADD_POST);
+  // console.log("addPostProps => ", addPostProps);
+  console.log("addPostProps data=> ", data);
+  console.log("addPostProps loading=> ", loading);
+  console.log("addPostProps error=> ", error);
+  const add = text => {
+    addPost({ variables: { text: "Hiiiii" } });
+  };
+  return <MyTextInput onSubmit={add} />;
+};
 
 export default NewPost;
