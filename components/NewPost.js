@@ -3,6 +3,7 @@ import { TextInput } from "react-native";
 
 import graphqlTag from "graphql-tag";
 import { Mutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 
 class MyTextInput extends React.Component {
   state = {
@@ -42,15 +43,28 @@ mutation addPost($text: String!) {
 
 class MutationPost extends Mutation {}
 
-const NewPost = () => (
-  <MutationPost mutation={ADD_POST} refetchQueries={["queryPosts"]}>
-    {addPost => {
-      const add = text => {
-        addPost({ variables: { text } });
-      };
-      return <MyTextInput onSubmit={add} />;
-    }}
-  </MutationPost>
-);
+const NewPost = props => {
+  console.log("Test props => ", props);
+  const [testAddPost] = useMutation(ADD_POST);
+  return (
+    <MutationPost mutation={ADD_POST} refetchQueries={["queryPosts"]}>
+      {addPost => {
+        const add = text => {
+          addPost({ variables: { text } });
+        };
+        return <MyTextInput onSubmit={add} />;
+      }}
+    </MutationPost>
+  );
+};
+
+// const NewPost = props => {
+//   console.log("Test props => ", props);
+//   // const [addPost] = useMutation(ADD_POST);
+//   const add = text => {
+//     addPost({ variables: { text } });
+//   };
+//   return <MyTextInput onSubmit={add} />;
+// };
 
 export default NewPost;
