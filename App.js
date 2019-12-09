@@ -8,16 +8,39 @@ import * as Font from "expo-font";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
-// import { HttpLink } from 'apollo-link-http';
+import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "react-apollo";
 
 import { mockedLink } from "./mock";
 import AppNavigator from "./navigation/AppNavigator";
+import gql from "graphql-tag";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: mockedLink // new HttpLink()
+  uri: "http://10.110.6.22:4444",
+  link: new HttpLink({
+    uri: "http://10.110.6.22:4444"
+  })
+  // link: mockedLink // new HttpLink()
 });
+
+// client
+//   .query({
+//     query: gql`
+//       query TodoApp {
+//         chats {
+//           id
+//           name
+//           participants {
+//             id
+//             firstName
+//           }
+//         }
+//       }
+//     `
+//   })
+//   .then(data => console.log(data))
+//   .catch(error => console.error(error));
 
 const styles = StyleSheet.create({
   container: {

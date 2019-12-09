@@ -1,35 +1,33 @@
 import * as React from "react";
 import { FlatList, Text } from "react-native";
+import { useQuery } from "@apollo/react-hooks";
 
 import graphqlTag from "graphql-tag";
-import { Query } from "react-apollo";
 
-const QUERY_POSTS = graphqlTag`
-query queryPosts {
-  posts {
+const QUERY_CHATS = graphqlTag`
+query queryChats {
+  chats {
     id
-    text
+    name
+    participants {
+      id
+      firstName
+    }
   }
 }
 `;
 
-class QueryPosts extends Query {}
+const ChatsList = () => {
+  const { data, loading, error } = useQuery(QUERY_CHATS);
+  if (loading) return <Text>Loading chats</Text>;
+  if (error) return <Text>error retrieving chats list</Text>;
+  return (
+    <FlatList
+      data={data.chats}
+      keyExtractor={item => String(item.id)}
+      renderItem={({ item }) => <Text>{item.name}</Text>}
+    />
+  );
+};
 
-const PostList = () => (
-  <QueryPosts query={QUERY_POSTS}>
-    {({ loading, error, data }) => {
-      if (loading) return <Text>Loading...</Text>;
-      if (error) return <Text>Error:{error}</Text>;
-      if (!data) return <Text>No Data</Text>;
-      return (
-        <FlatList
-          data={data.posts}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Text>{item.text}</Text>}
-        />
-      );
-    }}
-  </QueryPosts>
-);
-
-export default PostList;
+export default ChatsList;

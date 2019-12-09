@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 
 import NewChat from "../components/NewChat";
 import ChatsList from "../components/ChatsList";
+import UserList from "../components/UserList";
 import NewPost from "../components/NewPost";
 import PostList from "../components/PostList";
 
@@ -15,10 +16,11 @@ const styles = StyleSheet.create({
 
 const HomeScreen = () => (
   <View style={styles.container}>
-    {/* <NewChat />
-    <ChatsList /> */}
-    <NewPost />
-    <PostList />
+    <NewChat />
+    <ChatsList />
+    <UserList />
+    {/* <NewPost />
+    <PostList /> */}
   </View>
 );
 

@@ -60,15 +60,26 @@ class MutationPost extends Mutation {}
 
 const NewPost = props => {
   console.log("Test props => ", props);
-  const [addPost, { data, loading, error }] = useMutation(ADD_POST);
+  const [addPost, { data, loading, error, called, client }] = useMutation(
+    ADD_POST
+  );
   // console.log("addPostProps => ", addPostProps);
-  console.log("addPostProps data=> ", data);
-  console.log("addPostProps loading=> ", loading);
-  console.log("addPostProps error=> ", error);
-  const add = text => {
-    addPost({ variables: { text: "Hiiiii" } });
-  };
-  return <MyTextInput onSubmit={add} />;
+  console.log("addPost data=> ", data);
+  console.log("addPost loading=> ", loading);
+  console.log("addPost error=> ", error);
+  console.log("addPost called=> ", called);
+  // console.log("addPost client=> ", client);
+  // console.log("addPost error=> ", error);
+  // const add = text => {
+  //   addPost({ variables: { text: "Hiiiii" } });
+  // };
+  return (
+    <MyTextInput
+      onSubmit={() => {
+        addPost({ variables: { text: "A new Post" } });
+      }}
+    />
+  );
 };
 
 export default NewPost;

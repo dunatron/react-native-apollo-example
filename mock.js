@@ -27,11 +27,13 @@ const posts = [
 
 const mocks = {
   Mutation: () => ({
-    addPost: (_root, { text }) =>
+    addPost: (_root, { text }) => {
+      console.log("==ADD POST MUTATION BEING HIT==");
       posts.push({
         text,
         id: Date.now()
-      })
+      });
+    }
   }),
   Query: () => ({
     posts: () => posts
