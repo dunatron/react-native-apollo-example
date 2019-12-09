@@ -107,11 +107,7 @@ const NewChat = () => {
                   ]
                 }
               }
-            },
-            update: (proxy, payload) => {
-              console.log("naaaa cbf writing these eh");
-            },
-            refetchQueries: [{ query: QUERY_CHATS }]
+            }
           });
         }}
       />
